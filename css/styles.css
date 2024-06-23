@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+.gallery{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  /* max-width: 360px;
+  height: 300px; */
+  padding: 0;
+  margin: 100px 156px;
+}
+
+.gallery-item{
+  width: calc((100% - 48px)/3);
+  margin-bottom: 24px;
+  background-color: white;
+}
+
+.gallery-link{
+
+}
+
+.gallery-image{
+ max-width: 100%;
+}
