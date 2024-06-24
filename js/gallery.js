@@ -64,36 +64,68 @@ const images = [
   },
 ];
 
-const marcUp = images.reduce((html, image) => {
-  return (html += `<li class="gallery-item">
-    <a class="gallery-link" href="${image.original}" download>
+const ulGallery = document.querySelector(".gallery");
+
+function createImg(elements){
+  return elements.map(({preview, original, description}) =>
+  `<li class="gallery-item js-gallery">
+    <a class="gallery-link" href="${original}">
       <img
         class="gallery-image"
-        src="${image.preview}"
-        data-source="${image.original}"
-        alt="${image.description}"
+        src="${preview}"
+        data-source="${original}"
+        alt="${description}"
+        width = "360"
+        height = "200"
       />
     </a>
-  </li>`);
-}, '');
+  </li>`).join("");
+}
 
-const imgaesList = document.querySelector('.gallery');
+ulGallery.insertAdjacentHTML("afterbegin", createImg(images));
 
-imgaesList.insertAdjacentHTML('beforeend', marcUp);
+ulGallery.addEventListener('click', handlerProduct);
 
-const imageEl = document.querySelector('.gallery-image');
-const downloadEl = document.querySelectorAll('.gallery-link');
-const galleryIteamEl = document.querySelectorAll('.gallery-item');
-const allImgeEl = document.querySelectorAll('.gallery-image');
-
-
-downloadEl.forEach(event => event.addEventListener('click', (event) => {
+function handlerProduct(event){
+  if(event.currentTarget === event.target){
+    return;
+  };
   event.preventDefault();
-}));
+  const parent = event.target.closest(".js-gallery")
+  const originalImg = parent.dataset;
+  console.log(originalImg);
+};
 
-downloadEl.forEach(imge => {
-  imge.addEventListener('click', () =>{
-    imageEl.style.transform = 'scale(1.1)';
-  })
-})
+// const marcUp = images.reduce((html, image) => {
+//   return (html += `<li class="gallery-item">
+//     <a class="gallery-link" href="${image.original}" download>
+//       <img
+//         class="gallery-image"
+//         src="${image.preview}"
+//         data-source="${image.original}"
+//         alt="${image.description}"
+//       />
+//     </a>
+//   </li>`);
+// }, '');
+
+// const imgaesList = document.querySelector('.gallery');
+
+// imgaesList.insertAdjacentHTML('beforeend', marcUp);
+
+// const imageEl = document.querySelector('.gallery-image');
+// const downloadEl = document.querySelectorAll('.gallery-link');
+// const galleryIteamEl = document.querySelectorAll('.gallery-item');
+// const allImgeEl = document.querySelectorAll('.gallery-image');
+
+
+// downloadEl.forEach(event => event.addEventListener('click', (event) => {
+//   event.preventDefault();
+// }));
+
+// downloadEl.forEach((imge) => {
+//   imge.addEventListener('click', () =>{
+//     imageEl.style.transform = 'scale(1.1)';
+//   })
+// })
 
