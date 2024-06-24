@@ -64,6 +64,7 @@ const images = [
   },
 ];
 
+
 const ulGallery = document.querySelector(".gallery");
 
 function createImg(elements){
@@ -91,41 +92,21 @@ function handlerProduct(event){
     return;
   };
   event.preventDefault();
-  const parent = event.target.closest(".js-gallery")
-  const originalImg = parent.dataset;
-  console.log(originalImg);
+  const parent = event.target.closest(".gallery-image")
+  const originalImg = parent.dataset.source;
+  const currentImg = images.find(({original}) => original === originalImg);
+
+  const instance = basicLightbox.create(`
+    <div class="modal">
+      <img src="${currentImg.original}" alt="${currentImg.description}">
+    </div>
+  `)
+  instance.show();
+  if(instance.show()){
+    const modalWindow = document.querySelector('.modal');
+    modalWindow.addEventListener('click', () =>{
+      instance.close();
+    })
+  }
 };
-
-// const marcUp = images.reduce((html, image) => {
-//   return (html += `<li class="gallery-item">
-//     <a class="gallery-link" href="${image.original}" download>
-//       <img
-//         class="gallery-image"
-//         src="${image.preview}"
-//         data-source="${image.original}"
-//         alt="${image.description}"
-//       />
-//     </a>
-//   </li>`);
-// }, '');
-
-// const imgaesList = document.querySelector('.gallery');
-
-// imgaesList.insertAdjacentHTML('beforeend', marcUp);
-
-// const imageEl = document.querySelector('.gallery-image');
-// const downloadEl = document.querySelectorAll('.gallery-link');
-// const galleryIteamEl = document.querySelectorAll('.gallery-item');
-// const allImgeEl = document.querySelectorAll('.gallery-image');
-
-
-// downloadEl.forEach(event => event.addEventListener('click', (event) => {
-//   event.preventDefault();
-// }));
-
-// downloadEl.forEach((imge) => {
-//   imge.addEventListener('click', () =>{
-//     imageEl.style.transform = 'scale(1.1)';
-//   })
-// })
 

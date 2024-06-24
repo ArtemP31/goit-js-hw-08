@@ -13,32 +13,49 @@ li {
 }
 
 .gallery{
+  width: 1128px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 24px;
-  /* max-width: 360px;
-  height: 300px; */
-  padding: 0;
-  margin: 24px 156px;
+  
+  padding: 24px 156px;
+  margin: 0 auto;
 }
 
 .gallery-item{
-  width: calc((100% - 48px)/3);
-  margin-bottom: 24px;
+  flex-basis: calc((100% - 48px)/3);
+  
   background-color: white;
+}
+
+.gallery-item:nth-child(-n+6){
+  margin-bottom: 24px;
 }
 
 .gallery-link{
   width: 100%;
   height: 100%;
+  display: flex;
 }
 
 .gallery-image{
  width: 100%;
 }
 
+.gallery-image:hover, .gallery-image:focus{
+  transform: scaleX(1.04) scaleY(1.04);
+  transition: transform 0.3s ease; 
+}
+
 .modal{
+  display: flex;
+}
+
+.modal img{
   width: 1112px;
   height: 640px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
